@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:" />
+  <title>UnityBridge AI</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="logo">
+        <div class="logo-mark">UB</div>
+        <div>
+          <div class="logo-name">UnityBridge <span>AI</span></div>
+          <div class="logo-ver">v0.1.0 · In Testing</div>
+        </div>
+      </div>
+      <nav>
+        <button class="nav-btn active" data-tab="dashboard">📊 Дашборд</button>
+        <button class="nav-btn" data-tab="browsers">🌐 Браузеры</button>
+        <button class="nav-btn" data-tab="log">📜 Лог событий</button>
+        <button class="nav-btn" data-tab="help">❓ Помощь</button>
+      </nav>
+      <div class="sidebar-foot">
+        <div class="status-pill" id="statusPill"><span class="dot"></span><span id="statusText">Мост запускается…</span></div>
+      </div>
+    </aside>
+
+    <main class="content">
+      <!-- Дашборд -->
+      <section class="tab active" id="tab-dashboard">
+        <h1>Дашборд</h1>
+        <div class="cards">
+          <div class="card">
+            <div class="card-label">Unity</div>
+            <div class="card-value" id="unityStatus">—</div>
+            <div class="card-sub" id="unitySub">ожидание подключения…</div>
+          </div>
+          <div class="card">
+            <div class="card-label">Браузерные клиенты</div>
+            <div class="card-value" id="browserCount">0</div>
+            <div class="card-sub">страниц с расширением онлайн</div>
+          </div>
+          <div class="card">
+            <div class="card-label">Запросы в обработке</div>
+            <div class="card-value" id="pendingCount">0</div>
+            <div class="card-sub">ожидают ответа Unity</div>
+          </div>
+          <div class="card">
+            <div class="card-label">Мост</div>
+            <div class="card-value small" id="bridgeAddr">—</div>
+            <div class="card-sub">локальный WebSocket-эндпоинт</div>
+          </div>
+        </div>
+
+        <h2>Быстрый старт</h2>
+        <ol class="steps">
+          <li>Запустите эту программу — мост поднимется автоматически.</li>
+          <li>Во вкладке «Браузеры» нажмите «Установить расширение во все браузеры» (или загрузите папку <code>extension/</code> вручную на <code>chrome://extensions</code>).</li>
+          <li>Откройте Unity-проект с папкой <code>unity/UnityBridgeAI</code> в <code>Assets</code> — Unity сам подключится к мосту.</li>
+          <li>На любом AI-сайте (например, arena.ai) рядом с полем ввода появится кнопка <b>«⚡ Подключить к Unity»</b>.</li>
+        </ol>
+
+        <h2>Управление мостом</h2>
+        <div class="row">
+          <button class="btn" id="btnRestart">🔄 Перезапустить мост</button>
+          <button class="btn ghost" id="btnCopyToken">📋 Скопировать токен доступа</button>
+        </div>
+      </section>
+
+      <!-- Браузеры -->
+      <section class="tab" id="tab-browsers">
+        <h1>Автоустановка расширения</h1>
+        <p class="muted">Нажмите кнопку — расширение будет зарегистрировано во всех найденных браузерах (Chrome, Edge, Opera, Brave, Yandex, Firefox). После перезапуска браузера расширение появится автоматически.</p>
+        <div class="row">
+          <button class="btn primary" id="btnDetect">🔍 Найти браузеры</button>
+          <button class="btn primary" id="btnInstall">⬇️ Установить расширение во все браузеры</button>
+        </div>
+        <div id="browserList" class="browser-list"></div>
+        <div id="installResult" class="install-result"></div>
+        <h2>Ручная установка</h2>
+        <p class="muted">Chrome/Edge/Opera: <code>chrome://extensions</code> → «Режим разработчика» → «Загрузить распакованное» → выберите папку <code>extension/</code>.</p>
+      </section>
+
+      <!-- Лог -->
+      <section class="tab" id="tab-log">
+        <h1>Лог событий <button class="btn ghost small" id="btnClearLog">Очистить</button></h1>
+        <div class="log" id="logBox"></div>
+      </section>
+
+      <!-- Помощь -->
+      <section class="tab" id="tab-help">
+        <h1>Помощь</h1>
+        <h2>Как это работает</h2>
+        <p class="muted">Программа поднимает локальный мост на <code>ws://127.0.0.1:17777/ws</code>. Расширение браузера добавляет рядом с текстовыми полями кнопку «⚡ Подключить к Unity» — запрос уходит в мост, а расширение Unity забирает его и возвращает ответ прямо на страницу.</p>
+        <h2>Безопасность</h2>
+        <p class="muted">Мост слушает только <code>127.0.0.1</code>, проверяет Origin и одноразовый токен. Удалённые сайты не могут достучаться до Unity.</p>
+        <h2>Тестирование</h2>
+        <p class="muted">Запустите <code>npm test</code> — автоматические smoke-тесты моста. Версия 0.1.0 (Release, In Testing).</p>
+      </section>
+    </main>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>

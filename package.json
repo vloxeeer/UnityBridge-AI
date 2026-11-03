@@ -1,0 +1,18 @@
+{
+  "name": "unitybridge-ai",
+  "version": "0.1.0",
+  "description": "Мост между AI-сайтами (arena.ai и др.) и Unity. Десктопная программа + расширение браузера + расширение Unity.",
+  "main": "app/main.js",
+  "scripts": {
+    "start": "electron .",
+    "bridge-only": "node app/bridge-server.js",
+    "test": "node tests/bridge.test.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "ws": "^8.22.1"
+  },
+  "devDependencies": {
+    "electron": "^33.0.0"
+  }
+}

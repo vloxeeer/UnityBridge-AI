@@ -1,0 +1,46 @@
+.ub-wrap { position: relative; }
+.ub-connect-btn {
+  margin-left: 6px;
+  padding: 4px 10px;
+  border-radius: 8px;
+  border: 1px solid #6c8cff;
+  background: linear-gradient(90deg, #6c8cff, #9d6cff);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.ub-connect-btn:hover { filter: brightness(1.15); }
+
+.ub-panel {
+  position: absolute;
+  z-index: 2147483647;
+  width: 320px;
+  background: #121726;
+  color: #e8ecf8;
+  border: 1px solid #2b3557;
+  border-radius: 14px;
+  padding: 12px;
+  box-shadow: 0 12px 40px rgba(0,0,0,.55);
+  font-family: 'Segoe UI', system-ui, sans-serif;
+}
+.ub-title { font-weight: 700; font-size: 13px; margin-bottom: 8px; color: #9db1ff; }
+.ub-input {
+  width: 100%; box-sizing: border-box;
+  background: #0b0e17; color: #e8ecf8;
+  border: 1px solid #2b3557; border-radius: 8px;
+  padding: 8px; font-size: 13px; resize: vertical;
+}
+.ub-row { display: flex; gap: 6px; margin-top: 8px; }
+.ub-row button {
+  flex: 1; padding: 7px; border-radius: 8px; border: none; cursor: pointer;
+  font-size: 12px; font-weight: 600;
+}
+.ub-send { background: linear-gradient(90deg, #6c8cff, #9d6cff); color: #fff; }
+.ub-insert { background: #232c45; color: #cdd6ff; }
+.ub-insert:disabled { opacity: .45; cursor: default; }
+.ub-result { margin-top: 8px; font-size: 12px; line-height: 1.5; white-space: pre-wrap; max-height: 180px; overflow-y: auto; }
+.ub-result.ok { color: #3ddc97; }
+.ub-result.err { color: #ff6b81; }
+.ub-result.pending { color: #ffb454; }
